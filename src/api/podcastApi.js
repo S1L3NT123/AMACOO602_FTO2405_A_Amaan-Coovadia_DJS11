@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https://podcast-app-username.netlify.app';
+const baseURL = 'https://podcast-api.netlify.app';
 
 export const getAllShows = async () => {
   try {
@@ -28,4 +28,3 @@ export const getShowDetails = async (id) => {
     throw new Error('Failed to fetch show details');
   }
 };
-
