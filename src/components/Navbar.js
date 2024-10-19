@@ -12,9 +12,9 @@ const Navbar = () => {
         <li>
           <Link to="/">Home</Link>
         </li>
-        {/* <li>
-          <Link to="/browse">Browse Shows</Link>
-        </li> */}
+        {<li>
+          <Link to="/favourites">Favourites</Link>
+        </li> }
       </ul>
     </nav>
   );

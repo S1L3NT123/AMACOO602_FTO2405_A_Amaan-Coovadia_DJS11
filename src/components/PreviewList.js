@@ -1,5 +1,3 @@
-// File: src/components/PreviewList.js
-
 import React, { useEffect, useState } from 'react';
 import { getAllShows } from '../api/podcastApi';  // API call to get all shows
 import { Link } from 'react-router-dom';  // To create clickable links to individual show pages
