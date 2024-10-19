@@ -30,6 +30,7 @@ function App() {
           </footer>
         )}
       </div>
+      <Footer/>
     </Router>
   );
 }
