@@ -23,13 +23,15 @@ function App() {
         </main>
         {currentAudio && (
           <footer>
+              <Footer></Footer>
             <audio controls autoPlay>
               <source src={currentAudio.src} type="audio/mp3" />
               Your browser does not support the audio element.
             </audio>
+                
           </footer>
       )}
-      <Footer/>  
+
       </div>
       
     </Router>

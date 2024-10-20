@@ -57,7 +57,7 @@ const ShowDetail = ({ setCurrentAudio }) => {
       <select onChange={(e) => setSelectedSeason(show.seasons.find(season => season.id === e.target.value))}>
         {show.seasons.map((season) => (
           <option key={season.id} value={season.id}>
-            Season {season.number}
+            Season {show.seasons.number} {season.number}
           </option>
         ))}
       </select>
@@ -65,15 +65,16 @@ const ShowDetail = ({ setCurrentAudio }) => {
       {/* Display episodes for the selected season */}
       {selectedSeason && (
         <div>
-          <h2>Episodes for Season {selectedSeason.number}</h2>
+          <h2>Episodes  {selectedSeason.number}</h2>
           <ul>
             {selectedSeason.episodes.map((episode) => (
               <li key={episode.id}>
                 <h3>{episode.title}</h3>
+                
                 <button
                   onClick={() =>
                     setCurrentAudio({
-                      src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+                      src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", // preset song 
                       title: episode.title,
                     })
                   }

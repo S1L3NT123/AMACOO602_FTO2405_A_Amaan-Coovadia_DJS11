@@ -2,6 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { getAllShows } from '../api/podcastApi';  // API call to get all shows
 import { Link } from 'react-router-dom';
 
+// Genre mapping object
+const genreMap = {
+  1: 'Personal Growth',
+  2: 'Investigative Journalism',
+  3: 'History',
+  4: 'Comedy',
+  5: 'Entertainment',
+  6: 'Business',
+  7: 'Fiction',
+  8: 'News',
+  9: 'Kids and Family'
+};
+
+
 const PreviewList = () => {
   const [shows, setShows] = useState([]);
   const [error, setError] = useState(null);
@@ -36,8 +50,9 @@ const PreviewList = () => {
             <Link to={`/show/${show.id}`}>
               <img src={show.image} alt={show.title} style={{ width: '100px', height: '100px', borderRadius: '8px' }} />
               <h2>{show.title}</h2>
-              <p>Genres: {show.genres.join(', ')}</p>
-              <p>Seasons: {show.seasons.length}</p>  {/* Number of seasons */}
+              {/* Display the genres using the genreMap */}
+              <p>Genres: {show.genres.map(genreId => genreMap[genreId]).join(', ')}</p>
+              <p>Seasons: {show.seasons.length} </p>  {/* Number of seasons */}
               <p>Last Updated: {new Date(show.updatedAt).toLocaleDateString()}</p>
             </Link>
           </li>
@@ -48,3 +63,4 @@ const PreviewList = () => {
 };
 
 export default PreviewList;
+
