@@ -15,3 +15,6 @@ This project allows users to browse podcasts, listen to episodes, mark episodes 
 
 ## Contact Information
 For any issues, please reach out at amaanc123@gmail.com.
+
+## Netlify
+https://podcast-app-username.netlify.app/
