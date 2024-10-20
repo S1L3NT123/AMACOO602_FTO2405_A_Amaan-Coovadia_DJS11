@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getAllShows } from '../api/podcastApi';  // API call to get all shows
-import { Link } from 'react-router-dom';  // To create clickable links to individual show pages
+import { Link } from 'react-router-dom';
 
 const PreviewList = () => {
   const [shows, setShows] = useState([]);
@@ -11,7 +11,8 @@ const PreviewList = () => {
     const fetchShows = async () => {
       try {
         const data = await getAllShows();
-        setShows(data.sort((a, b) => a.title.localeCompare(b.title)));  // Sort shows alphabetically
+        // Sort the shows alphabetically
+        setShows(data.sort((a, b) => a.title.localeCompare(b.title)));
         setLoading(false);
       } catch (err) {
         setError(err.message);
@@ -33,19 +34,10 @@ const PreviewList = () => {
           <li key={show.id}>
             {/* Link to the show details page */}
             <Link to={`/show/${show.id}`}>
-              {/* Show Image */}
               <img src={show.image} alt={show.title} style={{ width: '100px', height: '100px', borderRadius: '8px' }} />
-              
-              {/* Show Title */}
               <h2>{show.title}</h2>
-              
-              {/* Show Genres */}
               <p>Genres: {show.genres.join(', ')}</p>
-              
-              {/* Number of Seasons */}
-              <p>Seasons: {show.seasons.length}</p>
-              
-              {/* Last Updated Date (formatted as human-readable) */}
+              <p>Seasons: {show.seasons.length}</p>  {/* Number of seasons */}
               <p>Last Updated: {new Date(show.updatedAt).toLocaleDateString()}</p>
             </Link>
           </li>

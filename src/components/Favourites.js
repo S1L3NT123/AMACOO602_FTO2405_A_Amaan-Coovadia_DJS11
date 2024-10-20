@@ -4,41 +4,57 @@ import React, { useEffect, useState } from "react";
 
 const Favourites = ({ setCurrentAudio }) => {
   const [favourites, setFavourites] = useState([]);
-  const [sortOrder, setSortOrder] = useState("title-asc");
+  const [sortedFavourites, setSortedFavourites] = useState([]);  // Store sorted favourites
+  const [sortOrder, setSortOrder] = useState("title-asc");  // Track sort order
 
+  // Load favourites from localStorage on component mount
   useEffect(() => {
     const favs = JSON.parse(localStorage.getItem("favourites")) || [];
     setFavourites(favs);
+    setSortedFavourites(favs);  // Set initial sorted list
   }, []);
 
-  const sortFavourites = (order) => {
-    const sortedFavs = [...favourites].sort((a, b) => {
-      if (order === "title-asc") return a.title.localeCompare(b.title);
-      if (order === "title-desc") return b.title.localeCompare(a.title);
-      return 0;
-    });
-    setFavourites(sortedFavs);
-  };
+  // Sort favourites whenever sortOrder changes
+  useEffect(() => {
+    const sortFavourites = () => {
+      const sortedFavs = [...favourites].sort((a, b) => {
+        if (sortOrder === "title-asc") return a.title.localeCompare(b.title);
+        if (sortOrder === "title-desc") return b.title.localeCompare(a.title);
+        if (sortOrder === "date-added-asc") return new Date(a.dateAdded) - new Date(b.dateAdded);
+        if (sortOrder === "date-added-desc") return new Date(b.dateAdded) - new Date(a.dateAdded);
+        return 0;
+      });
+      setSortedFavourites(sortedFavs);  // Update the sorted list
+    };
+
+    sortFavourites();
+  }, [sortOrder, favourites]);  // Only re-run when sortOrder or favourites change
 
   const removeFavourite = (id) => {
     const updatedFavs = favourites.filter((fav) => fav.id !== id);
     localStorage.setItem("favourites", JSON.stringify(updatedFavs));
     setFavourites(updatedFavs);
+    setSortedFavourites(updatedFavs);  // Also update the sorted list
   };
 
   return (
     <div className="container">
       <h1>Your Favourites</h1>
 
-      <select onChange={(e) => sortFavourites(e.target.value)}>
+      <select onChange={(e) => setSortOrder(e.target.value)}>
         <option value="title-asc">Title A-Z</option>
         <option value="title-desc">Title Z-A</option>
+        <option value="date-added-asc">Date Added (Oldest First)</option>
+        <option value="date-added-desc">Date Added (Newest First)</option>
       </select>
 
       <ul className="favourites-list">
-        {favourites.map((fav) => (
+        {sortedFavourites.map((fav) => (
           <li key={fav.id}>
             <h2>{fav.title}</h2>
+            <p>Show: {fav.showTitle}</p>
+            <p>Season: {fav.seasonNumber}</p>
+            <p>Added on: {new Date(fav.dateAdded).toLocaleString()}</p>
             <button
               onClick={() =>
                 setCurrentAudio({

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PreviewList from './components/PreviewList';
 import ShowDetail from './components/ShowDetail';
 import Navbar from './components/Navbar';
-// import Footer from './components/Footer';
+import Footer from './components/Footer';
 import Favourites from './components/Favourites';
 import './App.css';
 
@@ -29,7 +29,7 @@ function App() {
             </audio>
           </footer>
       )}
-      {/* <Footer/>   */}
+      <Footer/>  
       </div>
       
     </Router>
