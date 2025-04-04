@@ -1,8 +1,9 @@
+/* General Styles */
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Roboto", Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f5f5f5;
+  background-color: #f9f9f9;
   color: #333;
 }
 
@@ -14,23 +15,38 @@ body {
 
 main {
   flex: 1;
-  padding-bottom: 50px;
+  padding: 20px;
+  margin-top: 20px; /* Add space below the audio player */
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .podcast-image {
   max-width: 300px;
-  width: 100%; 
+  width: 100%;
   height: auto;
   display: block;
-  margin: 20px 0; 
+  margin: 20px 0;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.show-image {
+  max-width: 200px; /* Reduce the maximum width */
+  max-height: 200px; /* Add a maximum height */
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 20px 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .container p {
@@ -41,17 +57,19 @@ main {
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin-bottom: 20px;
   color: #444;
+  text-align: center;
 }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   margin-top: 10px;
+  color: #555;
 }
 
-/* List styling */
+/* List Styling */
 ul {
   list-style-type: none;
   padding: 0;
@@ -59,54 +77,200 @@ ul {
 
 li {
   background-color: #fff;
-  margin-bottom: 10px;
-  padding: 15px;
-  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 20px;
+  border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Link styling */
+li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Button Styling */
+.button-primary {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.button-primary:hover {
+  background-color: #0056b3;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Link Styling */
 a {
   text-decoration: none;
   color: #007bff;
+  font-weight: bold;
 }
 
 a:hover {
   text-decoration: underline;
 }
 
-/* Input styling */
-input[type="text"] {
+/* Input Styling */
+input[type="text"],
+select {
   padding: 10px;
   font-size: 1rem;
   width: 100%;
   margin-bottom: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* Error message styling */
+/* Error Message Styling */
 .error {
   color: red;
   margin-top: 20px;
+  font-weight: bold;
 }
 
-/* Loading message styling */
+/* Loading Message Styling */
 .loading {
   font-size: 1.2rem;
   color: #888;
+  text-align: center;
+}
+
+/* Audio Player Styling */
+.audio-player-container {
+  width: 100%; /* Ensure it spans the full width */
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 5px 10px; /* Keep padding minimal */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1000;
+  margin-top: 5px; /* Add spacing below the header */
+}
+
+.audio-player-container audio {
+  width: 100%; /* Make the audio player span the full width */
+  max-width: 100%; /* Ensure it doesn't exceed the container width */
+  height: 25px; /* Adjust height for better visibility */
+}
+
+/* Footer Styling */
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 0; /* Reduced padding */
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 0.9rem; /* Reduced font size */
+}
+
+/* Dark Mode Styles */
+.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.dark-mode .container {
+  background-color: #1e1e1e;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.dark-mode button {
+  background-color: #333;
+  color: #e0e0e0;
+}
+
+.dark-mode a {
+  color: #90caf9;
+}
+
+.dark-mode a:hover {
+  color: #64b5f6;
+}
+
+.dark-mode .footer {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.theme-toggle button {
+  background-color: #1e1e1e;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.theme-toggle button:hover {
+  background-color: #0056b3;
 }
 
 /* Responsive Styles */
 @media (max-width: 768px) {
-  /* For tablets and smaller devices */
   .container {
     max-width: 95%;
     padding: 10px;
   }
 
   h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
     font-size: 1.5rem;
+  }
+
+  li {
+    padding: 15px;
+  }
+
+  input[type="text"],
+  select {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .audio-player-container audio {
+    max-width: 300px;
+    height: 20px;
+  }
+
+  .footer p {
+    font-size: 0.8rem; /* Further reduce font size for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.8rem;
   }
 
   h2 {
@@ -117,29 +281,18 @@ input[type="text"] {
     padding: 10px;
   }
 
-  input[type="text"] {
-    font-size: 0.9rem;
-    padding: 8px;
-  }
-}
-
-@media (max-width: 480px) {
-  /* For mobile phones */
-  h1 {
-    font-size: 1.2rem;
-  }
-
-  h2 {
-    font-size: 1rem;
-  }
-
-  li {
-    padding: 8px;
-  }
-
-  input[type="text"] {
+  input[type="text"],
+  select {
     font-size: 0.8rem;
     padding: 6px;
   }
-}
 
+  .audio-player-container audio {
+    max-width: 250px;
+    height: 18px;
+  }
+
+  .footer p {
+    font-size: 0.7rem; /* Further reduce font size for mobile screens */
+  }
+}

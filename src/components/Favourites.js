@@ -4,37 +4,39 @@ import React, { useEffect, useState } from "react";
 
 const Favourites = ({ setCurrentAudio }) => {
   const [favourites, setFavourites] = useState([]);
-  const [sortedFavourites, setSortedFavourites] = useState([]);  // Store sorted favourites
-  const [sortOrder, setSortOrder] = useState("title-asc");  // Track sort order
+  const [sortedFavourites, setSortedFavourites] = useState([]); // Store sorted favourites
+  const [sortOrder, setSortOrder] = useState("title-asc"); // Track sort order
+
+  // Helper function to sort favourites
+  const sortFavourites = (favourites, sortOrder) => {
+    return [...favourites].sort((a, b) => {
+      if (sortOrder === "title-asc") return a.title.localeCompare(b.title);
+      if (sortOrder === "title-desc") return b.title.localeCompare(a.title);
+      if (sortOrder === "date-added-asc")
+        return new Date(a.dateAdded) - new Date(b.dateAdded);
+      if (sortOrder === "date-added-desc")
+        return new Date(b.dateAdded) - new Date(a.dateAdded);
+      return 0;
+    });
+  };
 
   // Load favourites from localStorage on component mount
   useEffect(() => {
     const favs = JSON.parse(localStorage.getItem("favourites")) || [];
     setFavourites(favs);
-    setSortedFavourites(favs);  // Set initial sorted list
+    setSortedFavourites(favs); // Set initial sorted list
   }, []);
 
   // Sort favourites whenever sortOrder changes
   useEffect(() => {
-    const sortFavourites = () => {
-      const sortedFavs = [...favourites].sort((a, b) => {
-        if (sortOrder === "title-asc") return a.title.localeCompare(b.title);
-        if (sortOrder === "title-desc") return b.title.localeCompare(a.title);
-        if (sortOrder === "date-added-asc") return new Date(a.dateAdded) - new Date(b.dateAdded);
-        if (sortOrder === "date-added-desc") return new Date(b.dateAdded) - new Date(a.dateAdded);
-        return 0;
-      });
-      setSortedFavourites(sortedFavs);  // Update the sorted list
-    };
-
-    sortFavourites();
-  }, [sortOrder, favourites]);  // Only re-run when sortOrder or favourites change
+    setSortedFavourites(sortFavourites(favourites, sortOrder));
+  }, [sortOrder, favourites]); // Only re-run when sortOrder or favourites change
 
   const removeFavourite = (id) => {
     const updatedFavs = favourites.filter((fav) => fav.id !== id);
     localStorage.setItem("favourites", JSON.stringify(updatedFavs));
     setFavourites(updatedFavs);
-    setSortedFavourites(updatedFavs);  // Also update the sorted list
+    setSortedFavourites(updatedFavs); // Also update the sorted list
   };
 
   return (
@@ -51,6 +53,8 @@ const Favourites = ({ setCurrentAudio }) => {
       <ul className="favourites-list">
         {sortedFavourites.map((fav) => (
           <li key={fav.id}>
+            {" "}
+            {/* Ensure each list item has a unique key */}
             <h2>{fav.title}</h2>
             <p>Show: {fav.showTitle}</p>
             <p>Season: {fav.seasonNumber}</p>
